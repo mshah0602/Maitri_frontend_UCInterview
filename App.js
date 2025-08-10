@@ -1,45 +1,48 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 
 export default function App() {
-  const [textColor, setTextColor] = useState("");
-  const [background, setBackground] = useState("white");
-
-  const handleChangeColor = () => {
-    if (textColor === "" || textColor.trim() === "") {
-      setBackground("white");
-    } else {
-      setBackground(textColor);
-    }
-  }
+  const fruits = ['Apple', 'Banana', 'Mango', 'Orange', 'Grapes'];
+  const [text, setText] = useState('');
 
   return (
-    <View style={[styles.main, { backgroundColor: background }]}>
+    <View style={styles.container}>
       <TextInput
-        style={styles.box}
-        placeholder="type color name or hex code"
-        value={textColor}
-        onChangeText={(val) => setTextColor(val)}
+        style={styles.input}
+        placeholder="Type something"
+        onChangeText={setText}
+        value={text}
       />
-      <Button title="Change Color" onPress={handleChangeColor} />
+
+      {/* Show fruits */}
+      {fruits.map((fruit, i) => (
+        <View key={i} style={styles.box}>
+          <Text>{fruit}</Text>
+        </View>
+      ))}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
+  container: {
+    paddingTop: 50,
     alignItems: 'center',
-    justifyContent: 'center'
+  },
+  input: {
+    height: 40,
+    width: 200,
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginBottom: 20,
+    paddingLeft: 5,
   },
   box: {
-    width: '80%',
-    height: 40,
-    borderWidth: 1,
-    borderColor: 'black',
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    backgroundColor: '#fff'
-  }
+    backgroundColor: 'lightblue',
+    padding: 10,
+    margin: 5,
+    width: 200,
+    alignItems: 'center',
+  },
 });
 
